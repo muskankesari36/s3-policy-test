@@ -15,7 +15,7 @@ terraform {
 
 #calling central modules for vpc and subnets deployment
 module "libryo_vpc" {
-  source     = "../../tf_aws_vpc"
+  source     = "./tf_aws_vpc"
   aws_region = var.aws_region
   tags = var.tags
   vpc_config = {
