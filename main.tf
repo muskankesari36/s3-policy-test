@@ -30,3 +30,8 @@ module "libryo_vpc" {
     traffic_type        = var.vpc_flow_log_config.traffic_type
   }
 }
+
+resource "aws_s3_bucket_policy" "example" {
+  bucket = "mystatebucket9018 "
+  policy = jsonencode({})
+}
