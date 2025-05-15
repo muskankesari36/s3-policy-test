@@ -31,63 +31,63 @@ module "libryo_vpc" {
   }
 }
 
-resource "aws_s3_bucket_policy" "example" {
-  bucket = "mystatebucket9018"
-  policy = jsonencode({
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "GitHubActionsDeployerRole",
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": [
-    "arn:aws:iam::407688908115:role/GitHubActionsDeployerRole",
-    "arn:aws:iam::407688908115:role/AWSReservedSSO_AWSAdministratorAccess_2403dc25de88e415/Admin_Muskan.Kesarwani@theermgroup.onmicrosoft.com"
-  ]
-      },
-      "Action": [
-        "s3:GetObject",
-        "s3:PutObject",
-        "s3:ListBucket"
-      ],
-      "Resource": [
-        "arn:aws:s3:::mystatebucket9018",
-        "arn:aws:s3:::mystatebucket9018/*"
-      ]
-    },
-    {
-      "Sid": "DenyNonHTTPS",
-      "Effect": "Deny",
-      "Principal": "*",
-      "Action": "s3:*",
-      "Resource": [
-        "arn:aws:s3:::mystatebucket9018",
-        "arn:aws:s3:::mystatebucket9018/*"
-      ],
-      "Condition": {
-        "Bool": {
-          "aws:SecureTransport": "false"
-        }
-      }
-    },
-    {
-      "Sid": "DenyAllExceptTerraformRole",
-      "Effect": "Deny",
-      "Principal": "*",
-      "Action": "s3:*",
-      "Resource": [
-        "arn:aws:s3:::mystatebucket9018",
-        "arn:aws:s3:::mystatebucket9018/*"
-      ],
-      "Condition": {
-        "StringNotEquals": {
-          "aws:PrincipalArn": [
-  "arn:aws:iam::407688908115:role/GitHubActionsDeployerRole",
-  "arn:aws:iam::407688908115:role/AWSReservedSSO_AWSAdministratorAccess_2403dc25de88e415/Admin_Muskan.Kesarwani@theermgroup.onmicrosoft.com"
-]
-        }
-      }
-    }
-  ]
-})
-}
+# resource "aws_s3_bucket_policy" "example" {
+#   bucket = "mystatebucket9018"
+#   policy = jsonencode({
+#   "Version": "2012-10-17",
+#   "Statement": [
+#     {
+#       "Sid": "GitHubActionsDeployerRole",
+#       "Effect": "Allow",
+#       "Principal": {
+#         "AWS": [
+#     "arn:aws:iam::407688908115:role/GitHubActionsDeployerRole",
+#     "arn:aws:iam::407688908115:role/AWSReservedSSO_AWSAdministratorAccess_2403dc25de88e415/Admin_Muskan.Kesarwani@theermgroup.onmicrosoft.com"
+#   ]
+#       },
+#       "Action": [
+#         "s3:GetObject",
+#         "s3:PutObject",
+#         "s3:ListBucket"
+#       ],
+#       "Resource": [
+#         "arn:aws:s3:::mystatebucket9018",
+#         "arn:aws:s3:::mystatebucket9018/*"
+#       ]
+#     },
+#     {
+#       "Sid": "DenyNonHTTPS",
+#       "Effect": "Deny",
+#       "Principal": "*",
+#       "Action": "s3:*",
+#       "Resource": [
+#         "arn:aws:s3:::mystatebucket9018",
+#         "arn:aws:s3:::mystatebucket9018/*"
+#       ],
+#       "Condition": {
+#         "Bool": {
+#           "aws:SecureTransport": "false"
+#         }
+#       }
+#     },
+#     {
+#       "Sid": "DenyAllExceptTerraformRole",
+#       "Effect": "Deny",
+#       "Principal": "*",
+#       "Action": "s3:*",
+#       "Resource": [
+#         "arn:aws:s3:::mystatebucket9018",
+#         "arn:aws:s3:::mystatebucket9018/*"
+#       ],
+#       "Condition": {
+#         "StringNotEquals": {
+#           "aws:PrincipalArn": [
+#   "arn:aws:iam::407688908115:role/GitHubActionsDeployerRole",
+#   "arn:aws:iam::407688908115:role/AWSReservedSSO_AWSAdministratorAccess_2403dc25de88e415/Admin_Muskan.Kesarwani@theermgroup.onmicrosoft.com"
+# ]
+#         }
+#       }
+#     }
+#   ]
+# })
+# }
