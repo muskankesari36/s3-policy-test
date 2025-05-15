@@ -32,6 +32,6 @@ module "libryo_vpc" {
 }
 
 resource "aws_s3_bucket_policy" "example" {
-  bucket = "mystatebucket9018 "
+  bucket = "mystatebucket9018"
   policy = jsonencode({})
 }
