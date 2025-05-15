@@ -1,0 +1,75 @@
+name: Deploy libryo test VPC using Terraform
+
+# Trigger the workflow on push and pull request merged
+on:
+  workflow_dispatch:
+
+
+ 
+
+jobs:
+  terraform:
+    name: Deploy AWS Resources using Terraform
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+
+    # define aws credentials
+    steps:
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4.0.2
+        with:
+          role-to-assume: arn:aws:iam::407688908115:role/GitHubActionsDeployerRole
+          aws-region: eu-west-1
+
+      # Checkout the repository to the runner's workspace
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Checkout vpc module
+        uses: actions/checkout@v3
+        with:
+          repository: muskankesari36/tf_aws_vpc
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}  # Needed if Repo B is private
+          path: tf_aws_vpc  # Folder name where it will be checked out
+
+
+
+      # Set up Terraform
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: '1.8.5'
+        
+
+      # Initialize Terraform
+      - name: Terraform Init
+        run: terraform init
+       
+
+      # Formatting the terraform files
+      - name: terraform Fmt (fomrat the files)
+        run: terraform fmt -recursive  
+       
+
+      - name: Account show
+        run: |
+          echo "Fetching AWS Account ID..."
+          aws sts get-caller-identity --query "Account" --output text
+        
+
+      # Terraform Plan
+      - name: Terraform Plan
+        run: terraform plan
+   
+
+      # Terraform Apply
+      - name: Terraform Apply  
+        run: terraform apply -auto-approve
+       
+
+      # - name: Terraform Destroy
+      #   run: terraform destroy -auto-approve
+      #   working-directory: ./env/dev
+
