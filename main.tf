@@ -69,25 +69,25 @@ resource "aws_s3_bucket_policy" "example" {
           "aws:SecureTransport": "false"
         }
       }
-    },
-    {
-      "Sid": "DenyAllExceptTerraformRole",
-      "Effect": "Deny",
-      "Principal": "*",
-      "Action": "s3:*",
-      "Resource": [
-        "arn:aws:s3:::mystatebucket9018",
-        "arn:aws:s3:::mystatebucket9018/*"
-      ],
-      "Condition": {
-        "StringNotEquals": {
-          "aws:PrincipalArn": [
-  "arn:aws:iam::407688908115:role/GitHubActionsDeployerRole",
-  "arn:aws:iam::407688908115:root"
-]
-        }
-      }
     }
+#     {
+#       "Sid": "DenyAllExceptTerraformRole",
+#       "Effect": "Deny",
+#       "Principal": "*",
+#       "Action": "s3:*",
+#       "Resource": [
+#         "arn:aws:s3:::mystatebucket9018",
+#         "arn:aws:s3:::mystatebucket9018/*"
+#       ],
+#       "Condition": {
+#         "StringNotEquals": {
+#           "aws:PrincipalArn": [
+#   "arn:aws:iam::407688908115:role/GitHubActionsDeployerRole",
+#   "arn:aws:iam::407688908115:root"
+# ]
+#         }
+#       }
+#     }
   ]
 })
 }
