@@ -41,8 +41,7 @@ resource "aws_s3_bucket_policy" "example" {
       "Effect": "Allow",
       "Principal": {
         "AWS": [
-    "arn:aws:iam::407688908115:role/GitHubActionsDeployerRole",
-    "arn:aws:iam::407688908115:root"
+    "arn:aws:iam::407688908115:role/GitHubActionsDeployerRole"
   ]
       },
       "Action": [
